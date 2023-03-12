@@ -26,20 +26,17 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
     @Override
     public Page<UserSubscriptionResponse> getAllPage(Pageable pageable) {
-        return userSubscriptionMapper.userSubscriptionTUserSubscriptionResponsePage(userSubscriptionRepository.findAll(pageable));
+        return userSubscriptionRepository.findAll(pageable);
     }
 
     @Override
     public List<UserSubscriptionResponse> getAllList() {
-        return userSubscriptionMapper.userSubscriptionToUserSubscriptionResponseList(userSubscriptionRepository.findAll());
+        return userSubscriptionRepository.findAll();
     }
 
     @Override
     public UserSubscriptionResponse findById(Long id) {
-        return userSubscriptionMapper
-                .userSubscriptionToUserSubscriptionResponse(userSubscriptionRepository
-                        .findById(id)
-                        .orElseThrow(() -> new ObjectNotFoundException("UserSubscription with id " + id + " not found")));
+        return userSubscriptionRepository.findById(id);
     }
 
     @Override
@@ -49,7 +46,7 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
         userFeignClient.getUserById(userId);
 
-        userSubscriptionRepository.save(userSubscriptionMapper.userSubscriptionRequestToUserSubscription(userSubscriptionRequest));
+        userSubscriptionRepository.save(userSubscriptionRequest);
     }
 
     @Override
@@ -58,7 +55,7 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
         Long userId = userSubscriptionUpdate.getHostUserId();
         userFeignClient.getUserById(userId);
 
-        userSubscriptionRepository.save(userSubscriptionMapper.userSubscriptionUpdateToUserSubscription(userSubscriptionUpdate));
+        userSubscriptionRepository.update(userSubscriptionUpdate);
     }
 
     @Override

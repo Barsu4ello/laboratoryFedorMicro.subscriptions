@@ -33,9 +33,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public SubscriptionResponse findById(Long id) {
         return subscriptionMapper
-                .subscriptionToSubscriptionResponse(subscriptionRepository
-                        .findById(id)
-                        .orElseThrow(() -> new ObjectNotFoundException("Subscription with id " + id + " not found")));
+                .subscriptionToSubscriptionResponse(subscriptionRepository.findById(id));
     }
 
     @Override
@@ -46,7 +44,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public void update(SubscriptionUpdate subscriptionUpdate) {
-        subscriptionRepository.save(subscriptionMapper.subscriptionUpdateToSubscription(subscriptionUpdate));
+        subscriptionRepository.update(subscriptionMapper.subscriptionUpdateToSubscription(subscriptionUpdate));
     }
 
     @Override

@@ -14,13 +14,19 @@ import java.util.Optional;
 //public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
 //}
 
-//@Repository
-public interface SubscriptionRepository{
+
+public interface SubscriptionRepository {
 
     Page<Subscription> findAll(Pageable pageable);
+
     List<Subscription> findAll();
-    Optional<Subscription> findById(Long id);
+
+    Subscription findById(Long id);
+
     void save(Subscription subscription);
+
+    void update(Subscription subscription);
+
     void deleteById(Long id);
 
 }
