@@ -22,7 +22,7 @@ import java.util.List;
 public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     private final UserSubscriptionRepository userSubscriptionRepository;
     private final UserSubscriptionMapper userSubscriptionMapper;
-    private final UserFeignClient userFeignClient;
+//    private final UserFeignClient userFeignClient;
 
     @Override
     public Page<UserSubscriptionResponse> getAllPage(Pageable pageable) {
@@ -41,19 +41,18 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
     @Override
     public void save(UserSubscriptionRequest userSubscriptionRequest) {
-        // Проверим есть такой пользователь в микросервисе users, иначе будет FeignException
-        Long userId = userSubscriptionRequest.getHostUserId();
-
-        userFeignClient.getUserById(userId);
+        // Проверим есть такой пользователь в микросервисе users, иначе будет FeignException  //(c KeyCloak это не надо)
+//        Long userId = userSubscriptionRequest.getHostUserId();
+//        userFeignClient.getUserById(userId);
 
         userSubscriptionRepository.save(userSubscriptionRequest);
     }
 
     @Override
     public void update(UserSubscriptionUpdate userSubscriptionUpdate) {
-        // Проверим есть такой пользователь в микросервисе users, иначе будет FeignException
-        Long userId = userSubscriptionUpdate.getHostUserId();
-        userFeignClient.getUserById(userId);
+        // Проверим есть такой пользователь в микросервисе users, иначе будет FeignException  //(c KeyCloak это не надо)
+//        Long userId = userSubscriptionUpdate.getHostUserId();
+//        userFeignClient.getUserById(userId);
 
         userSubscriptionRepository.update(userSubscriptionUpdate);
     }
